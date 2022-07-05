@@ -23,5 +23,5 @@ resource "google_artifact_registry_repository_iam_member" "apps_compute_mary_web
   location   = "asia-southeast1"
   repository = "mary-website"
   role       = "roles/artifactregistry.reader"
-  member     = "serviceAccount:${google_project.apps.number}-compute@developer.gserviceaccount.com"
+  member     = "serviceAccount:service-${google_project.apps.number}@serverless-robot-prod.iam.gserviceaccount.com"
 }
