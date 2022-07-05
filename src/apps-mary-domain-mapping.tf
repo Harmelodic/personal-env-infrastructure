@@ -4,7 +4,7 @@ variable "apps_mary_website_dns_name" {
 }
 
 
-resource "google_cloud_run_domain_mapping" "default" {
+resource "google_cloud_run_domain_mapping" "mary_website" {
   location = "asia-southeast1"
   name     = var.apps_mary_website_dns_name
   project  = google_project.apps.project_id
