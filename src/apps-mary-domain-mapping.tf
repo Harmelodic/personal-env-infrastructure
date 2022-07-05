@@ -4,18 +4,18 @@ variable "apps_mary_website_dns_name" {
 }
 
 
-resource "google_cloud_run_domain_mapping" "mary_website" {
-  location = "asia-southeast1"
-  name     = var.apps_mary_website_dns_name
-  project  = google_project.apps.project_id
-
-  metadata {
-    namespace = google_project.apps.project_id
-  }
-
-  spec {
-    force_override   = true
-    route_name       = "mary-website"
-    certificate_mode = "AUTOMATIC"
-  }
-}
+#resource "google_cloud_run_domain_mapping" "mary_website" {
+#  location = "asia-southeast1"
+#  name     = var.apps_mary_website_dns_name
+#  project  = google_project.apps.project_id
+#
+#  metadata {
+#    namespace = google_project.apps.project_id
+#  }
+#
+#  spec {
+#    force_override   = true
+#    route_name       = "mary-website"
+#    certificate_mode = "AUTOMATIC"
+#  }
+#}
