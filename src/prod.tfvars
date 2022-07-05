@@ -14,3 +14,4 @@ apps_gke_node_locations = [
 
 # Domain Variables
 apps_harmelodic_dns_name = "harmelodic.com"
+apps_mary_website_dns_name = "maryvandenberk.com"
