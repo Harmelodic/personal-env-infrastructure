@@ -26,7 +26,6 @@ resource "google_container_cluster" "apps" {
   ]
 
   description                 = "GKE Cluster for personal projects"
-  enable_binary_authorization = false
   enable_intranode_visibility = false
   enable_legacy_abac          = false
   enable_shielded_nodes       = true
@@ -57,6 +56,10 @@ resource "google_container_cluster" "apps" {
     network_policy_config {
       disabled = true
     }
+  }
+
+  binary_authorization {
+    evaluation_mode = "DISABLED"
   }
 
   cluster_autoscaling {
