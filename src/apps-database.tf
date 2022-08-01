@@ -1,47 +1,65 @@
-variable "apps_db_tier" {
-  description = "Type of DB machine"
-  sensitive   = true
-  type        = string
-}
-
-variable "apps_db_disk_size" {
-  description = "Size of DB storage in GB"
+variable "apps_database_disk_size" {
+  description = "Size of storage, in GB, for Apps DB"
   sensitive   = true
   type        = number
 }
 
-#resource "google_sql_database_instance" "instance" {
-#  name                = "apps"
-#  region              = var.region
-#  database_version    = "MYSQL_8_0"
-#  deletion_protection = false
-#  project             = google_project.apps.project_id
-#
-#  settings {
-#    tier      = var.apps_db_tier
-#    disk_size = var.apps_db_disk_size
-#    disk_type = "PD_SSD"
-#
-#    backup_configuration {
-#      enabled  = true
-#      location = var.region
-#
-#      backup_retention_settings {
-#        retained_backups = 2
-#        retention_unit   = "COUNT"
-#      }
-#    }
-#
-#    ip_configuration {
-#      ipv4_enabled = true
-#      require_ssl  = true
-#    }
-#
-#    maintenance_window {
-#      day          = 2
-#      hour         = 3
-#      update_track = "stable"
-#    }
-#  }
-#}
-#
+variable "apps_database_location" {
+  description = "Location of Apps DB"
+  sensitive   = true
+  type        = number
+}
+
+variable "apps_database_machine_tier" {
+  description = "Type of DB machine for Apps DB"
+  sensitive   = true
+  type        = string
+}
+
+resource "google_sql_database_instance" "apps" {
+  depends_on = [
+    google_project_service.apps_apis
+  ]
+
+  database_version    = "POSTGRES_14"
+  deletion_protection = false
+  name                = "apps"
+  project             = google_project.apps.project_id
+  region              = var.apps_database_location
+
+  settings {
+    activation_policy = "ALWAYS"
+    availability_type = "ZONAL"
+    tier              = var.apps_database_machine_tier
+    disk_autoresize   = false
+    disk_size         = var.apps_database_disk_size
+    disk_type         = "PD_SSD"
+    pricing_plan      = "PER_USE"
+
+    backup_configuration {
+      enabled  = true
+      location = var.apps_database_location
+
+      backup_retention_settings {
+        retained_backups = 2
+        retention_unit   = "COUNT"
+      }
+    }
+
+    database_flags {
+      name  = "cloudsql.iam_authentication"
+      value = "on"
+    }
+
+    ip_configuration {
+      ipv4_enabled = true
+      require_ssl  = true
+    }
+
+    maintenance_window {
+      day          = 2 # Tuesday
+      hour         = 3 # 2AM (UTC)
+      update_track = "stable"
+    }
+  }
+}

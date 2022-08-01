@@ -17,6 +17,7 @@ resource "google_project_service" "apps_apis" {
     "container.googleapis.com", # Required for using Google Kubernetes Engine
     "iam.googleapis.com", # Required for handling IAM permissions
     "run.googleapis.com", # Required for running Cloud Run deployments (mary-website)
+    "sqladmin.googleapis.com", # Required for using Cloud SQL databases
   ])
 
   disable_dependent_services = true
