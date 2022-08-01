@@ -19,6 +19,7 @@ resource "google_project_service" "host_apis" {
     "domains.googleapis.com", # Required for registering domain names
     "dns.googleapis.com", # Required for handling DNS
     "iam.googleapis.com", # Required for handling IAM permissions
+    "servicenetworking.googleapis.com", # Required for using private Cloud SQL databases
   ])
 
   disable_dependent_services = true
