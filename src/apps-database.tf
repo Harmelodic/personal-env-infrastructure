@@ -7,7 +7,7 @@ variable "apps_database_disk_size" {
 variable "apps_database_location" {
   description = "Location of Apps DB"
   sensitive   = true
-  type        = number
+  type        = string
 }
 
 variable "apps_database_machine_tier" {
