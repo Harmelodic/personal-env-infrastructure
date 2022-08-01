@@ -16,6 +16,10 @@ variable "apps_database_machine_tier" {
   type        = string
 }
 
+resource "random_id" "apps_database_name_suffix" {
+  byte_length = 4
+}
+
 resource "google_sql_database_instance" "apps" {
   depends_on = [
     google_project_service.apps_apis
@@ -23,18 +27,19 @@ resource "google_sql_database_instance" "apps" {
 
   database_version    = "POSTGRES_14"
   deletion_protection = false
-  name                = "apps"
+  name                = "apps-${random_id.apps_database_name_suffix.hex}"
   project             = google_project.apps.project_id
   region              = var.apps_database_location
 
   settings {
-    activation_policy = "ALWAYS"
-    availability_type = "ZONAL"
-    tier              = var.apps_database_machine_tier
-    disk_autoresize   = false
-    disk_size         = var.apps_database_disk_size
-    disk_type         = "PD_SSD"
-    pricing_plan      = "PER_USE"
+    activation_policy     = "ALWAYS"
+    availability_type     = "ZONAL"
+    tier                  = var.apps_database_machine_tier
+    disk_autoresize       = true
+    disk_autoresize_limit = 0
+    disk_size             = var.apps_database_disk_size
+    disk_type             = "PD_SSD"
+    pricing_plan          = "PER_USE"
 
     backup_configuration {
       enabled  = true
@@ -51,9 +56,17 @@ resource "google_sql_database_instance" "apps" {
       value = "on"
     }
 
+    insights_config {
+      query_insights_enabled  = true
+      query_string_length     = 1024
+      record_application_tags = true
+      record_client_address   = true
+    }
+
     ip_configuration {
-      ipv4_enabled = true
-      require_ssl  = true
+      ipv4_enabled    = false
+      private_network = google_compute_network.main.id
+      require_ssl     = true
     }
 
     maintenance_window {
@@ -61,5 +74,11 @@ resource "google_sql_database_instance" "apps" {
       hour         = 3 # 2AM (UTC)
       update_track = "stable"
     }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      settings.0.disk_size
+    ]
   }
 }
