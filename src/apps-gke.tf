@@ -16,11 +16,12 @@ resource "google_project_iam_member" "gke_service_agent_host_perms" {
   role    = each.key
 }
 
-# Explicit Kubernetes Engine Service Agent - normally granted when enabling Kubernetes API
-resource "google_project_iam_member" "gke_service_agent_perms" {
+# Grant GKE Service Agent access to be GKE Service Agent - normally granted when enabling Kubernetes API
+resource "google_project_iam_member" "gke_service_agent_apps_perms" {
   for_each = toset([
     "roles/container.serviceAgent"
   ])
+
   member  = "serviceAccount:service-${google_project.apps.number}@container-engine-robot.iam.gserviceaccount.com"
   project = google_project.apps.project_id
   role    = each.value
@@ -30,8 +31,8 @@ resource "google_container_cluster" "apps" {
   depends_on = [
     google_project_service.host_apis,
     google_project_service.apps_apis,
-    google_project_iam_member.gke_service_agent_perms,
     google_project_iam_member.gke_service_agent_host_perms,
+    google_project_iam_member.gke_service_agent_apps_perms,
     google_compute_route.main_default_internet_gateway
   ]
 
