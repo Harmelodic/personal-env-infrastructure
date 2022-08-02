@@ -23,7 +23,8 @@ resource "random_id" "apps_database_name_suffix" {
 resource "google_sql_database_instance" "apps" {
   depends_on = [
     google_project_service.apps_apis,
-    google_project_service.host_apis
+    google_project_service.host_apis,
+    google_service_networking_connection.private_vpc_connection
   ]
 
   database_version    = "POSTGRES_14"
