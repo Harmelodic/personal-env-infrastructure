@@ -26,3 +26,10 @@ resource "google_compute_subnetwork" "apps" {
     range_name    = local.services_secondary_range_name
   }
 }
+
+resource "google_compute_subnetwork_iam_member" "member" {
+  project    = google_project.host.project_id
+  subnetwork = google_compute_subnetwork.apps.name
+  role       = "roles/compute.networkUser"
+  member     = "serviceAccount:${google_project.apps.number}@cloudservices.gserviceaccount.com"
+}
