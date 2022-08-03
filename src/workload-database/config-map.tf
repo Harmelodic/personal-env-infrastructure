@@ -6,7 +6,7 @@ resource "kubernetes_config_map" "connection" {
 
   data = {
     database                 = google_sql_database.database.name
-    instance_connection_name = var.database_instance_connection_name
+    instance-connection-name = var.database_instance_connection_name
     username                 = google_sql_user.sql_user.name
   }
 }
