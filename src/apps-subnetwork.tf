@@ -9,7 +9,7 @@ resource "google_compute_subnetwork" "apps" {
   ]
 
   description              = "Subnetwork for applications"
-  ip_cidr_range            = "10.0.0.0/16"
+  ip_cidr_range            = local.network_cidr.apps_cluster_nodes
   name                     = "apps"
   private_ip_google_access = true
   project                  = google_project.host.project_id
@@ -17,12 +17,12 @@ resource "google_compute_subnetwork" "apps" {
   region                   = var.region
 
   secondary_ip_range {
-    ip_cidr_range = "10.1.0.0/16"
+    ip_cidr_range = local.network_cidr.apps_cluster_pods
     range_name    = local.cluster_secondary_range_name
   }
 
   secondary_ip_range {
-    ip_cidr_range = "10.2.0.0/16"
+    ip_cidr_range = local.network_cidr.apps_cluster_services
     range_name    = local.services_secondary_range_name
   }
 }

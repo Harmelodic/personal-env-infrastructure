@@ -31,3 +31,12 @@ resource "google_service_networking_connection" "private_vpc_connection" {
   reserved_peering_ranges = [google_compute_global_address.private_google_services_access.name]
   service                 = "servicenetworking.googleapis.com"
 }
+
+locals {
+  network_cidr = {
+    apps_cluster_nodes    = "10.0.0.0/16"
+    apps_cluster_pods     = "10.1.0.0/16"
+    apps_cluster_services = "10.2.0.0/16"
+    apps_cluster_masters  = "10.3.0.0/28"
+  }
+}
