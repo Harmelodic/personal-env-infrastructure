@@ -92,11 +92,11 @@ resource "google_container_cluster" "apps" {
     enabled = false
   }
 
-  private_cluster_config {
-    enable_private_endpoint = false
-    enable_private_nodes    = true
-    master_ipv4_cidr_block  = local.network_cidr.apps_cluster_masters
-  }
+#  private_cluster_config {
+#    enable_private_endpoint = false
+#    enable_private_nodes    = true
+#    master_ipv4_cidr_block  = local.network_cidr.apps_cluster_masters
+#  }
 
   release_channel {
     channel = "RAPID"
