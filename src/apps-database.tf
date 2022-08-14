@@ -16,10 +16,6 @@ variable "apps_database_machine_tier" {
   type        = string
 }
 
-resource "random_id" "apps_database_name_suffix" {
-  byte_length = 4
-}
-
 resource "google_sql_database_instance" "apps" {
   depends_on = [
     google_project_service.apps_apis,
@@ -29,7 +25,7 @@ resource "google_sql_database_instance" "apps" {
 
   database_version    = "POSTGRES_14"
   deletion_protection = false
-  name                = "apps-${random_id.apps_database_name_suffix.hex}"
+  name                = "apps"
   project             = google_project.apps.project_id
   region              = var.apps_database_location
 
