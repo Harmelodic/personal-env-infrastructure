@@ -8,7 +8,6 @@ data "google_project" "personal_artifacts" {
 
 # Harmelodic Artifacts
 resource "google_artifact_registry_repository_iam_member" "apps_compute_harmelodic" {
-  provider   = google-beta
   project    = data.google_project.personal_artifacts.project_id
   location   = var.region
   repository = "harmelodic"
@@ -18,7 +17,6 @@ resource "google_artifact_registry_repository_iam_member" "apps_compute_harmelod
 
 # Mary Website Artifacts
 resource "google_artifact_registry_repository_iam_member" "apps_compute_mary_website" {
-  provider   = google-beta
   project    = data.google_project.personal_artifacts.project_id
   location   = "asia-southeast1"
   repository = "mary-website"
