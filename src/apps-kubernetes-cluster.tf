@@ -44,7 +44,7 @@ resource "google_container_cluster" "apps" {
   initial_node_count          = 1
   location                    = var.apps_gke_location
   logging_service             = "logging.googleapis.com/kubernetes"
-  min_master_version          = "1.26"
+  min_master_version          = "1.27"
   name                        = "apps"
   network                     = google_compute_network.main.id
   project                     = google_project.apps.project_id
