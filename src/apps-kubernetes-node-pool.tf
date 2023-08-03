@@ -35,7 +35,6 @@ resource "google_container_node_pool" "apps" {
     image_type      = "cos_containerd"
     local_ssd_count = 0
     machine_type    = var.apps_gke_node_pool_machine_type
-    preemptible     = true
 
     labels = {
       environment = terraform.workspace
