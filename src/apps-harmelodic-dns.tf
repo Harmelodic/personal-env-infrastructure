@@ -73,6 +73,7 @@ resource "google_dns_record_set" "harmelodic_com_txt" {
   rrdatas = [
     "google-site-verification=jXVba9WLVzprbkW4EpS3vtWL5-2YH03AwSc8sprMfSU",
     "keybase-site-verification=sDm605nNkmQuRsuciUxr9KmDkMgBVUKD5Ea38C_8L4w",
-    "OSSRH-92980" # https://issues.sonatype.org/browse/OSSRH-92980
+    "OSSRH-92980" # https://issues.sonatype.org/browse/OSSRH-92980,
+    "did=did:plc:simdj7zyuj4g3vuklsj6nqsq"
   ]
 }
