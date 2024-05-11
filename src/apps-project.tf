@@ -18,6 +18,7 @@ resource "google_project_service" "apps_apis" {
     "iam.googleapis.com",               # Required for handling IAM permissions
     "run.googleapis.com",               # Required for running Cloud Run deployments (mary-website)
     "servicenetworking.googleapis.com", # Required for using private Cloud SQL databases
+    "storage.googleapis.com",           # Required for using Google Cloud Storage
     "sqladmin.googleapis.com",          # Required for using Cloud SQL databases
   ])
 
