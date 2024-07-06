@@ -64,6 +64,7 @@ resource "google_sql_database_instance" "apps" {
     ip_configuration {
       ipv4_enabled    = false
       private_network = google_compute_network.main.id
+      require_ssl     = true // deprecated, but still required to require SSL
       ssl_mode        = "TRUSTED_CLIENT_CERTIFICATE_REQUIRED"
     }
 
