@@ -31,7 +31,10 @@ resource "google_dns_record_set" "harmelodic_com_a" {
   type         = "A"
 
   rrdatas = [
-    "35.228.252.4",
+    "185.199.108.153", # GitHub Pages
+    "185.199.109.153", # GitHub Pages
+    "185.199.110.153", # GitHub Pages
+    "185.199.111.153"  # GitHub Pages
   ]
 }
 
