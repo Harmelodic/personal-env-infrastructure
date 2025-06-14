@@ -40,13 +40,36 @@ resource "google_dns_record_set" "harmelodic_com_a" {
 
 resource "google_dns_record_set" "harmelodic_com_cname" {
   managed_zone = google_dns_managed_zone.harmelodic_com.name
-  name         = "*.${var.apps_harmelodic_dns_name}."
+  name         = "www.${var.apps_harmelodic_dns_name}."
   project      = google_project.host.project_id
   ttl          = 300
   type         = "CNAME"
 
   rrdatas = [
-    "${var.apps_harmelodic_dns_name}."
+    "harmelodic.github.io."
+  ]
+}
+
+resource "google_dns_record_set" "argo_cd_harmelodic_com_a" {
+  managed_zone = google_dns_managed_zone.harmelodic_com.name
+  name         = "argo-cd.${var.apps_harmelodic_dns_name}."
+  project      = google_project.host.project_id
+  ttl          = 300
+  type         = "A"
+
+  rrdatas = [
+    "35.228.252.4"
+  ]
+}
+resource "google_dns_record_set" "pact_harmelodic_com_a" {
+  managed_zone = google_dns_managed_zone.harmelodic_com.name
+  name         = "pact.${var.apps_harmelodic_dns_name}."
+  project      = google_project.host.project_id
+  ttl          = 300
+  type         = "A"
+
+  rrdatas = [
+    "35.228.252.4"
   ]
 }
 
