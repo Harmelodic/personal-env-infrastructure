@@ -16,6 +16,14 @@ variable "apps_gke_node_pool_machine_type" {
   type        = string
 }
 
+resource "google_service_account" "gke_node_pool_apps" {
+  account_id                   = "gke-node-pool-apps"
+  create_ignore_already_exists = true
+  display_name                 = "GKE Node Pool Apps"
+  description                  = "The service account for the GKE Node Pool used for Apps"
+  project                      = google_project.apps.project_id
+}
+
 resource "google_container_node_pool" "apps" {
   cluster        = google_container_cluster.apps.name
   location       = var.apps_gke_location
