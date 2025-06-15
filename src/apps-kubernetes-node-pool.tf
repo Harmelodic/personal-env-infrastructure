@@ -32,7 +32,7 @@ resource "google_container_node_pool" "apps" {
   node_config {
     disk_size_gb    = 100
     disk_type       = "pd-standard"
-    image_type      = "cos_containerd"
+    image_type      = "COS_CONTAINERD"
     local_ssd_count = 0
     machine_type    = var.apps_gke_node_pool_machine_type
     preemptible     = true
