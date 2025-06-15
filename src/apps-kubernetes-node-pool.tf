@@ -24,6 +24,15 @@ resource "google_service_account" "gke_node_pool_apps" {
   project                      = google_project.apps.project_id
 }
 
+# Grant node pool access to artifact registry repository for deploying harmelodic apps
+resource "google_artifact_registry_repository_iam_member" "apps_compute_harmelodic" {
+  project    = data.google_project.personal_artifacts.project_id
+  location   = var.region
+  repository = "harmelodic"
+  role       = "roles/artifactregistry.reader"
+  member     = google_service_account.gke_node_pool_apps.member
+}
+
 resource "google_container_node_pool" "apps" {
   cluster        = google_container_cluster.apps.name
   location       = var.apps_gke_location
@@ -44,6 +53,7 @@ resource "google_container_node_pool" "apps" {
     local_ssd_count = 0
     machine_type    = var.apps_gke_node_pool_machine_type
     preemptible     = true
+    service_account = google_service_account.gke_node_pool_apps.email
 
     labels = {
       environment = terraform.workspace
