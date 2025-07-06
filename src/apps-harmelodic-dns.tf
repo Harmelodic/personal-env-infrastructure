@@ -101,7 +101,6 @@ resource "google_dns_record_set" "harmelodic_com_txt" {
     "google-site-verification=jXVba9WLVzprbkW4EpS3vtWL5-2YH03AwSc8sprMfSU",  # Google Domains
     "keybase-site-verification=sDm605nNkmQuRsuciUxr9KmDkMgBVUKD5Ea38C_8L4w", # Keybase
     "OSSRH-92980",                                                           # Maven Repository - https://issues.sonatype.org/browse/OSSRH-92980
-    "did=did:plc:simdj7zyuj4g3vuklsj6nqsq"                                   # Bluesky
   ]
 }
 
@@ -113,6 +112,6 @@ resource "google_dns_record_set" "atproto_harmelodic_com_txt" {
   type         = "TXT"
 
   rrdatas = [
-    "did=did:plc:simdj7zyuj4g3vuklsj6nqsq"
+    "did=did:plc:simdj7zyuj4g3vuklsj6nqsq" # Bluesky
   ]
 }
