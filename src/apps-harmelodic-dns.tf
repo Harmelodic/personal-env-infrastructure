@@ -61,6 +61,7 @@ resource "google_dns_record_set" "argo_cd_harmelodic_com_a" {
     "35.228.252.4"
   ]
 }
+
 resource "google_dns_record_set" "pact_harmelodic_com_a" {
   managed_zone = google_dns_managed_zone.harmelodic_com.name
   name         = "pact.${var.apps_harmelodic_dns_name}."
@@ -101,5 +102,17 @@ resource "google_dns_record_set" "harmelodic_com_txt" {
     "keybase-site-verification=sDm605nNkmQuRsuciUxr9KmDkMgBVUKD5Ea38C_8L4w", # Keybase
     "OSSRH-92980",                                                           # Maven Repository - https://issues.sonatype.org/browse/OSSRH-92980
     "did=did:plc:simdj7zyuj4g3vuklsj6nqsq"                                   # Bluesky
+  ]
+}
+
+resource "google_dns_record_set" "atproto_harmelodic_com_txt" {
+  managed_zone = google_dns_managed_zone.harmelodic_com.name
+  name         = "_atproto.${var.apps_harmelodic_dns_name}."
+  project      = google_project.host.project_id
+  ttl          = 300
+  type         = "TXT"
+
+  rrdatas = [
+    "did=did:plc:simdj7zyuj4g3vuklsj6nqsq"
   ]
 }
