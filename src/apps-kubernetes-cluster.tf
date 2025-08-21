@@ -37,6 +37,7 @@ resource "google_container_cluster" "apps" {
     google_compute_route.main_default_internet_gateway
   ]
 
+  # checkov:skip=CKV_GCP_69: Node pool is defined elsewhere
   description                 = "GKE Cluster for personal projects"
   enable_intranode_visibility = false
   enable_legacy_abac          = false
