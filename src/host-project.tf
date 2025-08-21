@@ -11,6 +11,23 @@ resource "google_project" "host" {
   project_id          = "personal-${terraform.workspace}-host-${random_integer.host_project_suffix.result}"
 }
 
+resource "google_project_iam_audit_config" "host" {
+  project = google_project.host.id
+  service = "allServices"
+
+  audit_log_config {
+    log_type = "ADMIN_READ"
+  }
+
+  audit_log_config {
+    log_type = "DATA_READ"
+  }
+
+  audit_log_config {
+    log_type = "DATA_WRITE"
+  }
+}
+
 resource "google_project_service" "host_apis" {
   for_each = toset([
     "cloudbilling.googleapis.com",      # Required for hooking project to Cloud Billing

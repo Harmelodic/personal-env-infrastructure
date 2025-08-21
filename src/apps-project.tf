@@ -11,6 +11,23 @@ resource "google_project" "apps" {
   project_id          = "personal-${terraform.workspace}-apps-${random_integer.apps_project_suffix.result}"
 }
 
+resource "google_project_iam_audit_config" "apps" {
+  project = google_project.apps.id
+  service = "allServices"
+
+  audit_log_config {
+    log_type = "ADMIN_READ"
+  }
+
+  audit_log_config {
+    log_type = "DATA_READ"
+  }
+
+  audit_log_config {
+    log_type = "DATA_WRITE"
+  }
+}
+
 resource "google_project_service" "apps_apis" {
   for_each = toset([
     "cloudbilling.googleapis.com",      # Required for hooking project to Cloud Billing
