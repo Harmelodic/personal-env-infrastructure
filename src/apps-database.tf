@@ -54,6 +54,11 @@ resource "google_sql_database_instance" "apps" {
       value = "on"
     }
 
+    database_flags {
+      name  = "log_duration"
+      value = "on"
+    }
+
     insights_config {
       query_insights_enabled  = true
       query_string_length     = 1024
