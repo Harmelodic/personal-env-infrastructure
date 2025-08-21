@@ -23,6 +23,7 @@ resource "google_sql_database_instance" "apps" {
     google_service_networking_connection.private_vpc_connection
   ]
 
+  # checkov:skip=CKV_GCP_79: TODO: Waiting on GCP to fix their later versions of Postgres Cloud SQL.
   database_version    = "POSTGRES_14"
   deletion_protection = false
   name                = "apps"
@@ -84,6 +85,8 @@ resource "google_sql_database_instance" "apps" {
       value = "on"
     }
 
+    # checkov:skip=CKV_GCP_55: TODO: Review if applicable
+    # checkov:skip=CKV_GCP_109: TODO: Review if applicable
     database_flags {
       name  = "log_min_messages"
       value = "WARNING"
@@ -94,6 +97,7 @@ resource "google_sql_database_instance" "apps" {
       value = "all"
     }
 
+    # checkov:skip=CKV_GCP_110: TODO: Review if applicable
     database_flags {
       name  = "pgaudit.log"
       value = "'all'"

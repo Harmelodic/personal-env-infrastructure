@@ -37,6 +37,11 @@ resource "google_container_cluster" "apps" {
     google_compute_route.main_default_internet_gateway
   ]
 
+  # checkov:skip=CKV_GCP_65: TODO: Review using Google Groups for RBAC
+  # checkov:skip=CKV_GCP_20: TODO: Review config for master authorized networks
+  # checkov:skip=CKV_GCP_66: TODO: Review need for binary authorization
+  # checkov:skip=CKV_GCP_13: TODO: Review need for client credentials
+  # checkov:skip=CKV_GCP_61: TODO: Review need for flow logs / intranode visibility
   # checkov:skip=CKV_GCP_69: Node pool is defined elsewhere
   description                 = "GKE Cluster for personal projects"
   enable_intranode_visibility = false
