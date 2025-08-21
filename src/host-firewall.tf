@@ -6,7 +6,6 @@ resource "google_compute_firewall" "http-allow" {
   allow {
     protocol = "tcp"
     ports = [
-      "80",
       "443"
     ]
   }
