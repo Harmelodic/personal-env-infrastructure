@@ -77,7 +77,7 @@ resource "google_container_node_pool" "apps" {
     }
 
     workload_metadata_config {
-      mode = "GKE_METADATA_SERVER"
+      mode = "GKE_METADATA"
     }
   }
 
