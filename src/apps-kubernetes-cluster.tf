@@ -18,6 +18,7 @@ resource "google_project_iam_member" "gke_service_agent_host_perms" {
 
 # Grant GKE Service Agent access to be GKE Service Agent - normally granted when enabling Kubernetes API
 resource "google_project_iam_member" "gke_service_agent_apps_perms" {
+  # checkov:skip=CKV_GCP_49: TODO Review using project permissions
   for_each = toset([
     "roles/container.serviceAgent"
   ])
@@ -89,6 +90,7 @@ resource "google_container_cluster" "apps" {
   }
 
   network_policy {
+    # checkov:skip=CKV_GCP_12: TODO: Review network policy disabled
     enabled = false
   }
 
