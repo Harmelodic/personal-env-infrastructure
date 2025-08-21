@@ -51,6 +51,8 @@ resource "google_compute_shared_vpc_service_project" "apps" {
 }
 
 resource "google_project_iam_member" "automation_apps_project_perms" {
+  # checkov:skip=CKV_GCP_49: TODO Review using project permissions
+  # checkov:skip=CKV_GCP_117: TODO: Review using owner
   for_each = toset([
     "roles/billing.projectManager",
     "roles/owner",

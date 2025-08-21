@@ -4,10 +4,7 @@ locals {
 }
 
 resource "google_compute_subnetwork" "apps" {
-  depends_on = [
-    google_compute_shared_vpc_service_project.apps
-  ]
-
+  # checkov:skip=CKV_GCP_26: VPC Flow Logs are a bit pricey - so don't require
   description              = "Subnetwork for applications"
   ip_cidr_range            = local.network_cidr.apps_cluster_nodes
   name                     = "apps"
@@ -25,6 +22,10 @@ resource "google_compute_subnetwork" "apps" {
     ip_cidr_range = local.network_cidr.apps_cluster_services
     range_name    = local.services_secondary_range_name
   }
+
+  depends_on = [
+    google_compute_shared_vpc_service_project.apps
+  ]
 }
 
 resource "google_compute_subnetwork_iam_member" "member" {

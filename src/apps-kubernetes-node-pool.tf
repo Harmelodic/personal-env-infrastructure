@@ -75,6 +75,10 @@ resource "google_container_node_pool" "apps" {
       enable_integrity_monitoring = true
       enable_secure_boot          = true
     }
+
+    workload_metadata_config {
+      mode = "GKE_METADATA_SERVER"
+    }
   }
 
   upgrade_settings {
