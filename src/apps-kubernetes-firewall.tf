@@ -17,5 +17,5 @@ resource "google_compute_firewall" "control-plane-allow-access-to-nodes" {
     local.network_cidr.apps_cluster_masters
   ]
 
-  target_tags = google_container_node_pool.apps.node_config.0.tags
+  target_tags = google_container_node_pool.apps.node_config[0].tags
 }
