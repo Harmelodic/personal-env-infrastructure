@@ -89,7 +89,7 @@ resource "google_sql_database_instance" "apps" {
     # checkov:skip=CKV_GCP_109: TODO: Review if applicable
     database_flags {
       name  = "log_min_messages"
-      value = "WARNING"
+      value = "warning"
     }
 
     database_flags {
