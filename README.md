@@ -1,6 +1,6 @@
 # personal-env-infrastructure
 
-Infrastructure code for an environment of my Personal projects
+Infrastructure code for an environment of my Personal projects.
 
 Inside the `src` directory is where the central infrastructure is defined for personal projects. For example:
 
