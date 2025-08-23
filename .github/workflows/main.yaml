@@ -8,12 +8,12 @@ on:
 
 jobs:
   verify-terraform:
-    uses: harmelodic/workflows/.github/workflows/verify-terraform.yaml@dd030062661cb2ee7c857959cb64a6e2807f86ce
+    uses: harmelodic/workflows/.github/workflows/verify-terraform.yaml@d8c3ce35546b8b035d333149dea72ab3fac2ab83
     with:
       directory: src
   release-terraform:
     needs: verify-terraform
-    uses: harmelodic/workflows/.github/workflows/release-terraform.yaml@dd030062661cb2ee7c857959cb64a6e2807f86ce
+    uses: harmelodic/workflows/.github/workflows/release-terraform.yaml@d8c3ce35546b8b035d333149dea72ab3fac2ab83
     with:
       directory: src
       workspace: prod
