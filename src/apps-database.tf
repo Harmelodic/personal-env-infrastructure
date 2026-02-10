@@ -100,7 +100,7 @@ resource "google_sql_database_instance" "apps" {
     # checkov:skip=CKV_GCP_110: TODO: Review if applicable
     database_flags {
       name  = "pgaudit.log"
-      value = "'all'"
+      value = "all"
     }
 
     insights_config {
