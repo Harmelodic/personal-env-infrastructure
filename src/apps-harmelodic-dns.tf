@@ -58,7 +58,7 @@ resource "google_dns_record_set" "argo_cd_harmelodic_com_a" {
   type         = "A"
 
   rrdatas = [
-    "35.228.252.4"
+    "35.228.67.177"
   ]
 }
 
@@ -70,7 +70,7 @@ resource "google_dns_record_set" "pact_harmelodic_com_a" {
   type         = "A"
 
   rrdatas = [
-    "35.228.252.4"
+    "35.228.67.177"
   ]
 }
 
